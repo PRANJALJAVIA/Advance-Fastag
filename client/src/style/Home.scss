@@ -1,0 +1,53 @@
+$margin-home-container: "4rem";
+
+.home__container {
+  width: calc(100% - 2 * #{$margin-home-container});
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin: #{$margin-home-container};
+
+  .maps__container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .information__container {
+    width: 50%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    .dynamic_header {
+      h1 {
+        font-size: xxx-large;
+        font-weight: 600;
+      }
+    }
+
+    .buttons {
+      width: 60%;
+      display: flex;
+      justify-content: space-evenly;
+      text-align: center;
+
+      button {
+        background-color: black;
+        color: white;
+        padding: 0.5rem 2rem;
+        border-radius: 2px;
+        border: none;
+        outline: none;
+        font-size: large;
+        cursor: pointer;
+      }
+    }
+  }
+}
