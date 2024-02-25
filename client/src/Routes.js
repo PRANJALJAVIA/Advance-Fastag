@@ -6,6 +6,7 @@ import Login from "./Pages/Login";
 import Home from "./Pages/Home";
 import Error404 from "./Pages/Error404";
 import { AuthProvider } from "./context/AuthContext";
+import AddPlace from "./Pages/AddPlace";
 
 const ProjectRoutes = () => {
   return (
