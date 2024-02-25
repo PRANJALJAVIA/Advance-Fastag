@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./style/Auth.scss";
+import "../style/Auth.scss";
 import axios from "axios";
-import { baseurl } from "../../config";
+import { baseurl } from "../config";
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobile: "",
+    address: "",
     password: "",
   });
 
@@ -20,11 +24,11 @@ const Register = () => {
     e.preventDefault();
 
     await axios
-      .post(`${baseurl}/api/v1/users/`, formData)
+      .post(`${baseurl}/api/user/register`, formData)
       .then((response) => response.json)
       .then(() => {
         alert("user created successfully! now login to continue...");
-        navigate("/login");
+        navigate("/sign-in");
       })
       .catch((error) => alert(error.response.data.username));
   };
@@ -36,13 +40,51 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            name="username"
-            placeholder="Username"
-            value={formData.username}
+            name="firstName"
+            placeholder="First Name"
+            value={formData.firstName}
             onChange={handleChange}
           />
 
           <br />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+
+          <br />
+          <input
+            type="text"
+            name="email"
+            placeholder="Enter Email Address"
+            value={formData.email}
+            onChange={handleChange}
+          />
+
+          <br />
+          <input
+            type="text"
+            name="mobile"
+            placeholder="Enter mobile Number"
+            value={formData.mobile}
+            onChange={handleChange}
+          />
+
+          <br />
+
+          <input
+            type="text"
+            name="address"
+            placeholder="Enter Address"
+            value={formData.address}
+            onChange={handleChange}
+          />
+
+          <br />
+
           <input
             type="password"
             name="password"
@@ -60,7 +102,7 @@ const Register = () => {
             margin: "1rem 0",
           }}
         >
-          Already have an account? <Link to={"/login"}>Login here</Link>
+          Already have an account? <Link to={"/sign-in"}>Login here</Link>
         </div>
       </div>
     </div>

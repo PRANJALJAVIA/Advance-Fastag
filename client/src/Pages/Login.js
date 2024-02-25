@@ -1,21 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import "./style/Auth.scss";
+import "../style/Auth.scss";
 import AuthContext from "../context/AuthContext";
 
 const Login = () => {
-  let { loginUser, logoutUser } = useContext(AuthContext);
+  let { loginUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    logoutUser();
-  }, [logoutUser]);
+//   useEffect(() => {
+//     logoutUser();
+//   }, [logoutUser]);
 
   return (
     <div className="container">
       <div className="main__container">
         <h1>Welcome</h1>
         <form onSubmit={loginUser}>
-          <input type="text" name="username" placeholder="Username" required />
+          <input type="email" name="email" placeholder="Email" required />
 
           <br />
           <input
@@ -34,7 +34,7 @@ const Login = () => {
             margin: "1rem 0",
           }}
         >
-          Dont have account? <Link to={"/register"}>Register here</Link>
+          Dont have account? <Link to={"/sign-up"}>Register here</Link>
         </div>
       </div>
     </div>

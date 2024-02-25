@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${baseurl}/api/token/`, {
+    const response = await fetch(`${baseurl}/api/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
     if (data) {
       localStorage.setItem("authTokens", JSON.stringify(data));
       setAuthTokens(data);
-      setUser(jwtDecode(data.access));
+      setUser(jwtDecode(data.token));
       navigate("/");
     } else {
       alert("Something went wrong while logging in the user!");
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     const data = await response.json();
     if (response.status === 200) {
       setAuthTokens(data);
-      setUser(jwtDecode(data.access));
+      setUser(jwtDecode(data.token));
       localStorage.setItem("authTokens", JSON.stringify(data));
     } else {
       logoutUser();

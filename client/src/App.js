@@ -1,11 +1,12 @@
-import ProtectedRoute from "./context/ProtectedRoute";
+import ProjectRoutes from "./Routes";
+
 
 
 function App() {
   return (
     <div className="App">
-      <ProtectedRoute />
-    </div>
+      <ProjectRoutes />
+    </div> 
   );
 }
 
