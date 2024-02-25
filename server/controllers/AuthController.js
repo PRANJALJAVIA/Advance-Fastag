@@ -1,5 +1,6 @@
 const userModel = require("../modules/User");
 const UserCounter = require("../modules/UserCounter");
+const Location = require("../modules/Location");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
@@ -72,7 +73,25 @@ const loginController = async (req,res) => {
     }
 };
 
+const profileController = async(req, res) => {
+  const {user_id} = req.body;
+  try{
+    const user = await userModel.findOne({user_id:user_id});
+    const locations = await Location.find({user_id:user_id});
+    const data = {
+      user : user,
+      locations : locations
+    };
+    return res.status(200).json(data);
+  }
+  catch(error){
+    console.log(error);
+  }
+
+}
+
 module.exports = {
     registerController,
     loginController,
+    profileController
 }
