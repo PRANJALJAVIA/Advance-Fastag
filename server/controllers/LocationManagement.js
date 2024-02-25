@@ -38,7 +38,7 @@ const Search = async(req, res) => {
     const {category, place_name} = req.body;
 
     try{
-        const location = await Location.find({category:category, place_name:place_name});
+        const location = await Location.find({category:category, place_name:place_name, type:"Public"});
         if(location.length == 0){
             return res.status(200).json("No Results Found");
         }
