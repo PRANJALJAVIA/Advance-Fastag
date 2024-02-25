@@ -7,6 +7,7 @@ import Home from "./Pages/Home";
 import Error404 from "./Pages/Error404";
 import { AuthProvider } from "./context/AuthContext";
 import AddPlace from "./Pages/AddPlace";
+import FindPlace from "./Pages/FindPlace";
 
 const ProjectRoutes = () => {
   return (
@@ -23,6 +24,23 @@ const ProjectRoutes = () => {
             }
           />
           <Route path="/sign-in" element={<Login />} />
+          <Route
+            path="/add-place"
+            element={
+              <ProtectedRoute>
+                <AddPlace />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/find-place"
+            element={
+              <ProtectedRoute>
+                <FindPlace />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/sign-in" exact element={<Login />} />
 
           <Route path="/*" element={<Error404 />} />
         </Routes>
