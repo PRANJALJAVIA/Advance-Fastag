@@ -63,6 +63,7 @@ const loginController = async (req,res) => {
         }
 
         const token = jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, {expiresIn: "1d",});
+        localStorage.setItem("userid", user_id);
 
         res.status(200).send({ message: "Login Success", success: true, token });
     }catch(error){
