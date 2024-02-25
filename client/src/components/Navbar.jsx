@@ -3,8 +3,8 @@ import "../style/Components.scss";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const Navbar = () => {
-  const [isNavbarActive, setIsNavbarActive] = useState(false)
-
+  const [isNavbarActive, setIsNavbarActive] = useState(false);
+  
   return (
     <>
       <div className="navbar__Heading">

@@ -64,9 +64,9 @@ const loginController = async (req,res) => {
         }
 
         const token = jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, {expiresIn: "1d",});
-        localStorage.setItem("userid", user_id);
+        // localStorage.setItem("userid", user_id);
 
-        res.status(200).send({ message: "Login Success", success: true, token });
+        res.status(200).send({ message: "Login Success", success: true, user_id : user.user_id, token });
     }catch(error){
         console.log(error);
         res.status(500).send({ message: `Error in login CTRL ${error.meaasge}` });
