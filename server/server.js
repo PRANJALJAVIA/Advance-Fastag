@@ -17,6 +17,7 @@ app.use(morgan('dev'));
 
 //routes
 app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api", require("./routes/locationRoutes"));
 
 const port = process.env.PORT || 9090
 

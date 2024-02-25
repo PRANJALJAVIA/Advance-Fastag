@@ -21,7 +21,7 @@ const ProjectRoutes = () => {
               </ProtectedRoute>
             }
           />
-          <Route path="/sign-in" exact element={<Login />} />
+          <Route path="/sign-in" element={<Login />} />
 
           <Route path="/*" element={<Error404 />} />
         </Routes>

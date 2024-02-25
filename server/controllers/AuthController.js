@@ -1,4 +1,5 @@
-const userModel = require("../modules/users");
+const userModel = require("../modules/User");
+const UserCounter = require("../modules/UserCounter");
 const bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
@@ -15,7 +16,11 @@ const registerController = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(pass, salt);
 
+    const {curr_id} = await UserCounter.findOne({counter:"id"});
+    const user_id = curr_id;
+
     user = await userModel.create({
+      user_id : user_id,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
@@ -25,7 +30,7 @@ const registerController = async (req, res) => {
     });
 
     await user.save();
-
+    const usercounter = await UserCounter.findOneAndUpdate({ counter: "id" }, { "$inc": { "curr_id": 1}});
     res.status(200).send({ message: "Registration successful", success: true });
   } catch (error) {
     console.log(error);
@@ -39,6 +44,7 @@ const registerController = async (req, res) => {
 };
 
 const loginController = async (req,res) => {
+  console.log("Hello");
     try{
         var user = await userModel.findOne({email: req.body.email});
         console.log(user)
@@ -56,7 +62,7 @@ const loginController = async (req,res) => {
               .send({ message: "Invalid EmailId or password", success: false });
         }
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {expiresIn: "1d",});
+        const token = jwt.sign({ id: user.user_id }, process.env.JWT_SECRET, {expiresIn: "1d",});
 
         res.status(200).send({ message: "Login Success", success: true, token });
     }catch(error){
@@ -64,7 +70,6 @@ const loginController = async (req,res) => {
         res.status(500).send({ message: `Error in login CTRL ${error.meaasge}` });
     }
 };
-
 
 module.exports = {
     registerController,

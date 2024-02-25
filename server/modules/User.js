@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema({
+const User = new mongoose.Schema({
+    user_id : {
+        type:Number,
+        require:true
+    },
     firstName: {
         type: String,
         require: true,
@@ -25,12 +29,13 @@ const userSchema = new mongoose.Schema({
         type: String, 
         require: true,
     },
-    isAdmin: {
-        type: Boolean,
-        default: false,
-    },
+    rating : {
+        type: Number,
+        require: true,
+        deafult : 0
+    }
 });
 
-const userModel = mongoose.model('users', userSchema);
+const userModel = mongoose.model('User', User);
 
 module.exports = userModel;
